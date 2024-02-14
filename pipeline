@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+    
+     environment {
+        AWS_ACCESS_KEY_ID     = credentials('access_key')
+        AWS_SECRET_ACCESS_KEY = credentials('secret_key')
+    }
+    
+    stages{
+        stage("checkout") {
+            steps {
+                git 'https://github.com/naveencivil/practice.git'
+            }
+        }
+        stage("init") {
+            steps {
+                sh "terraform init"
+            }
+        }
+    }
+}
